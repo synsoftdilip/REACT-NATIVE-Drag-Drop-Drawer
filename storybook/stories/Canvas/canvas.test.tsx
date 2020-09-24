@@ -1,7 +1,6 @@
 // Canvas.test.js
 import React from "react";
 import renderer from 'react-test-renderer';
-//import DesignComponent from "./stories";
 import Canvas from "./canvas";
 import { render,fireEvent } from "@testing-library/react-native";
 import { shallow } from "@testing-library/react-native";
@@ -52,35 +51,6 @@ test("Should render a component in the itemContainer prop", () => {
   const ItemDrawerItems =  getAllByTestId('ItemDrawerItems');
   expect(ItemDrawerItems.length).toBe(items.length);
 });
-
-/*
-test("Should apply the style provided by itemContainerStyle on each item if one is provided", () => {
-  const items = [
-    {
-      id: "1",
-      name: "Table",
-      group: "Furniture",
-      image:
-        "https://i.pinimg.com/originals/7a/42/82/7a4282b44d0b6c5339088454cbc9f8da.png"
-    }   
-  ];
-
-  const { queryByLabelText, getByText, container } = render(
-    <Canvas  location="Left"
-    name="Menu"
-    items={items}
-    showTitle={true}
-    searchIsEnabled={true}
-    disableDragAndDrop={false}
-    title={"Test task"}
-    closeButtonIsShowing={true}
-    dndName={"Drag and Drop"}
-    itemContainerStyle={{ color: "red" }} />
-  );  
-  container.querySelector(".drawerButton")?.click();
-  expect(container.querySelector(".ItemDrawerItemSource").style.color).toBe('red');
-});
-*/
 
 test("Should show the Item Drawer in the LEFT position if the LEFT option is used in the location prop", () => {
   const items = [

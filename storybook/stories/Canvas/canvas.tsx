@@ -34,25 +34,19 @@ interface canvasProps {
 
 
 /**
- * 
  *  Canvas view with drawer options
- * 
  */
 const Canvas = (props:canvasProps) => {
-
   const [droppedItem, setDroppedItem] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(false);
   
-   const onDrop = (data: any) =>{
+  /**
+   * Item drop function
+   */
+  const onDrop = (data: any) =>{
     setDroppedItem(droppedItem.concat(data))
-
   }
 
-
-  const onHover = (hoverData: any, hoverDataIndex: any)=> {
-    //this.setState({ hoverData, hoverDataIndex });
-    
-  }
   /**
    * Grop item by category
    */
@@ -63,11 +57,40 @@ const Canvas = (props:canvasProps) => {
       }, {})
     }
     
-    // events define
+  /**
+   * On click of button closes the drawer
+   */
+  const onClose=()=>{
+    setOpenDrawer(false);
+  }
+
+  /**
+  * On click of button opens and closes the drawer
+  */
+  const onPressButton = () => {
+    setOpenDrawer(true)
+  }
+
+  /**
+   * Function is called on handle Search Change
+   */
+  const  handleSearchChange = (text:string) => {
+    onSearch();
+    let searchText = text.trim();
+    const arraySearchedResults = props.items.filter(function (item: any) {
+        return (item.name.toLowerCase().includes(searchText.toLowerCase()))
+      })
+      setItems(groupBy(arraySearchedResults,"group"))
+   }
+
+  /**
+   * Item hover function
+   */
+  const onHover = (hoverData: any, hoverDataIndex: any)=> {
+  }
 
   /**
    * Function is called on item drag
-   * @param item 
    */
     const onItemDrag=()=>{
       console.log("onItemDrag");
@@ -88,48 +111,16 @@ const Canvas = (props:canvasProps) => {
     }
 
   /**
-   * FUnction is called on item search
+   * Function is called on item search
    */
     const onSearch=()=>{
       console.log("onSearch");
     }
 
-   /**
-   * On click of button closes the drawer
-   */
-    const onClose=()=>{
-        setOpenDrawer(false);
-      console.log("drawer onClose");
-    }
-  
-    
-  /**
-   * On click of button opens and closes the drawer
-   */
-  const onPressButton = () => {
-    setOpenDrawer(true)
-}
-
-  /**
-   * FUnction is called on handle Search Change
-   */
-    const  handleSearchChange = (text:string) => {
-      onSearch();
-      let searchText = text.trim();
-      const arraySearchedResults = props.items.filter(function (item: any) {
-          return (item.name.toLowerCase().includes(searchText.toLowerCase()))
-        })
-        setItems(groupBy(arraySearchedResults,"group"))
-     }
-
-     //const [arrayCat, setArrayCat] = useState(groupBy(props.items,"group"));
-
-     const [items, setItems] = useState(groupBy(props.items,"group"));
- //console.log("items",items);
- 
+    const [items, setItems] = useState(groupBy(props.items,"group"));
    
- /**
-   * FUnction is called on render Category Items
+   /**
+   * Function is called on render Category Items
    */
     const renderCategoryItems = (arrayCatItems: any,i: string | number | null | undefined) => {
               
@@ -154,8 +145,6 @@ const Canvas = (props:canvasProps) => {
         );       
     }
   
-
-
   /**
    * render view
    */
@@ -418,9 +407,7 @@ export default Canvas;
 
 
 /**
- * 
  *  define draggy Props
- * 
  */
 interface draggyProps {
   onDrop?: any,
@@ -460,9 +447,7 @@ class Draggy extends React.Component<draggyProps> {
 
 
 /**
- * 
  *  Define props for DraggyInner
- * 
  */
 interface draprops {
   dragging?: any,
@@ -473,18 +458,14 @@ interface draprops {
 }
 
 /**
- * 
  *  Define State for DraggyInner
- * 
  */
 interface draStatae {
   color: any
 }
 
 /**
- * 
  *  Draggy component used to create daggable item view.
- * 
  */
 class DraggyInner extends React.Component<draprops,draStatae> {
     constructor(props: draprops) {
@@ -561,14 +542,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-
-  // topContainer: {
-  //   top:openDrawer && props.location == "Top" ?  windowHeight/2 : 0  ,
-  //   left: openDrawer && props.location == "Left" ?  windowWidth/2 : 0, 
-  //   bottom:openDrawer && props.location == "Bottom" ?  windowHeight/2 : 0,
-  //   right: openDrawer && props.location == "Right" ?  windowWidth/2 : 0, 
-  //   position: 'absolute'
-  // },
 
   dropZone: {
     top: 45,
