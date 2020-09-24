@@ -2,7 +2,7 @@
 import React from "react";
 import renderer from 'react-test-renderer';
 //import DesignComponent from "./stories";
-import Canvas from "./stories/Canvas";
+import Canvas from "./canvas";
 import { render,fireEvent } from "@testing-library/react-native";
 import { shallow } from "@testing-library/react-native";
 
