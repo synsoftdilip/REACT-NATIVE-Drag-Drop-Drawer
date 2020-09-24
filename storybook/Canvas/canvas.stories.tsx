@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
-import Canvas from './Canvas/canvas';
+import Canvas from '.';
+
 
 {
   /* category array for menu*/

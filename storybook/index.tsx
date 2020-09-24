@@ -2,10 +2,11 @@ import { getStorybookUI, configure } from '@storybook/react-native';
 import './rn-addons';
 
 configure(() => {
-  require('./stories');
+  require('./Canvas/canvas.stories');
 }, module);
 
 const StorybookUIRoot = getStorybookUI({
   asyncStorage: null,
 });
 export default StorybookUIRoot;
+
